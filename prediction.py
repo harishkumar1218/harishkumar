@@ -17,4 +17,13 @@ class pre:
                     a*=(p-k)/(i-k)
             t+=a*j
         return t
+  
+p=prediction
+x = [0, 1, 3, 4, 7]
+y = [1, 3, 49, 129, 813]
+p.pre(x,y).predict(0.5)
+plt.plot(x,y)
+plt.ylabel("y axis")
+plt.xlabel("x axis")
+plt.show()
 
