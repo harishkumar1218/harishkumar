@@ -2,7 +2,7 @@
 - 👀 I’m interested in ml,dl,design,stock_market...
 - 🌱 I’m currently learning Btech
 - 💞️ I’m looking to collaborate on ml project
-- 📫 How to reach me intagram @__hacker__76
+- 📫 How to reach me intagram @__hacker__76 and email harishkumarchillu@gmail.com
 
 <!---
 harishkumar1218/harishkumar1218 is a ✨ special ✨ repository because its `README.md` (this file) appears on your GitHub profile.
