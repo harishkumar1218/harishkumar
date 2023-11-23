@@ -15,6 +15,7 @@ valset,testset=t.utils.data.random_split(testset,[int(0.9*len(testset)),int(0.1*
 trainset_dr=t.utils.data.DataLoader(trainset,batch_size=64,shuffle=True)
 testset_dr=t.utils.data.DataLoader(testset,batch_size=32,shuffle=False)
 valset_dr=t.utils.data.DataLoader(valset,batch_size=32,shuffle=False)
+
 #ploting
 fig=plt.figure(figsize=(7,5))
 for i in range(5,6):
@@ -22,6 +23,8 @@ for i in range(5,6):
     plt.title(trainset[i][1])
     plt.imshow(img)
 plt.show()
+
+
 #model class defing
 class Modle(t.nn.Module):
     def __init__(self):
