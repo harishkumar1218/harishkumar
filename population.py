@@ -1,49 +1,53 @@
-import matplotlib.pyplot as plt
-import math as mt
-t=[]
-class pop:
-      def __init__(self):
-        self.x=[]
-        self.y=[]
-        self.t=[]
+#importing 
+import pandas as pd
+from sklearn.model_selection import train_test_split
+from sklearn.linear_model import LinearRegression
+from sklearn.metrics import mean_squared_error, r2_score
+import numpy as np
 
-      def lis(self,z):
-              d = [j - i for i,j in zip(z,z[1:])]
-              t.append(d)
-              if len(d)==1:
-                 return t
-              return self.lis(d)
 
-      def fac(self,p,j):
-          i=j
-          d=1
-          while(i>=0):
-              d*=p-i
-              i-=1
-          return d
+#importing dataset
+data = pd.read_csv('/content/sample_data/PopulationGrowth.csv')#import from https://www.kaggle.com/datasets/omarsobhy14/population-growth-from-1950
 
-      def predict(self,r):
-          d=x[0]
-          h = y[x.index(d)]
-          z = (r - d) / (x[1] - x[0])
-          l=self.lis(y)
-          l.reverse()
-          o=len(y)-1
-          for i in l:
-              for j in i:
-                  h += self.fac(z,o-1) * j / (mt.factorial(o))
-                  break
-              o = o - 1
-          return h
-p=pop()
-x=[1891,1901,1911,1921,1931]
-y=[46,66,81,93,101]
-print(p.predict(670))
-plt.xlabel("x axis")
-plt.ylabel("y axis")
-plt.plot(x,y)
-plt.show()
+x = [x for x in data['Year'] ]
+y = [x for x in data['Population Growth Rate'] ]
 
+X_train, X_test, y_train, y_test = train_test_split(x, y, test_size=0.2, random_state=42)
+X_train=np.array(X_train)
+X_test=np.array(X_test)
+
+#convering string to float
+X_train=X_train.astype("float")
+X_test=X_test.astype("float")
+y_train=np.array([float(str(x).replace(',', '')) for x in y_train])#convertin str "1,00,000" to 100000.0
+y_test=np.array([float(str(x).replace(',', '')) for x in y_test])#convertin str "1,00,000" to 100000.0
+
+#reshaping
+X_train=X_train.reshape(-1,1)
+y_train=y_train.reshape(-1,1)
+X_test=X_test.reshape(-1,1)
+y_test=y_test.reshape(-1,1)
+
+
+#LinearRegression from sklearn
+model = LinearRegression()
+model.fit(X_train, y_train)
+
+
+y_pred = model.predict(X_test)
+mse = mean_squared_error(y_test, y_pred)
+r2 = r2_score(y_test, y_pred)
+
+print(f"Mean Squared Error: {mse}")
+print(f"R-squared Score: {r2}")
+print(model.predict(np.array([2024]).reshape(-1,1))) 
+
+
+# output
+# Mean Squared Error: 1.6107328272876634e+16
+# R-squared Score: 0.9953609519587924
+# [[8.07090182e+09]]
+# model predicted good for year 2024, there would be 8.07090182e+09 population
 
 
 
